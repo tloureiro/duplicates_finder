@@ -1,7 +1,8 @@
 require 'json'
 
+
 if ARGV[0].nil?
-  STDERR.puts "Please, provide the path(s) that should be scanned"
+  STDERR.puts "Please, provide the path(s) that should be scanned. The last parameter must be the target folder"
   exit
 else
   path = ARGV.join(" ")
@@ -23,14 +24,10 @@ output.each_line { |line|
   
 }
 
-duplicates = []
 
-map.each_value { |value|  
+map.values.each { |file|  
   
-  if value.length > 1
-    duplicates << value
-  end
+  `cp "#{file[0]}" "#{ARGV[ARGV.length - 1]}"`
 }
 
 
-puts duplicates.to_json
